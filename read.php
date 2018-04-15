@@ -14,11 +14,8 @@ $db = $database->getConnection();
 // initialize object
 $event = new event($db);
  
-// get keywords
-$keywords=isset($_GET["s"]) ? $_GET["s"] : "";
- 
 // query events
-$stmt = $event->search($keywords);
+$stmt = $event->read();
 $num = $stmt->rowCount();
  
 // check if more than 0 record found
@@ -40,8 +37,15 @@ if($num>0){
         $event_item=array(
             "id" => $id,
             "name" => $name,
-            "description" => html_entity_decode($description),
-            "price" => $price,
+            "details" => html_entity_decode($details),
+            "location" => $location,
+			            "start_date" => $start_date,
+
+			            "end_date" => $end_date,
+            "image" => image,
+           
+
+
             "category_id" => $category_id,
             "category_name" => $category_name
         );
